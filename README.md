@@ -1,10 +1,10 @@
 # sisakulint-action
 
-[![GitHub release](https://img.shields.io/github/v/release/sisaku-security/sisakulint-action?display_name=tag&sort=semver)](https://github.com/sisaku-security/sisakulint-action/releases)
+[![GitHub release](https://img.shields.io/github/v/release/gh-intel/sisakulint-action?display_name=tag&sort=semver)](https://github.com/gh-intel/sisakulint-action/releases)
 [![Marketplace](https://img.shields.io/badge/Marketplace-sisakulint-purple?logo=github)](https://github.com/marketplace/actions/sisakulint)
-[![License](https://img.shields.io/github/license/sisaku-security/sisakulint-action)](./LICENSE)
+[![License](https://img.shields.io/github/license/gh-intel/sisakulint-action)](./LICENSE)
 
-A GitHub Action that runs [**sisakulint**](https://github.com/sisaku-security/sisakulint) — a fast, CI-friendly static linter and SAST for GitHub Actions workflows — and uploads the results to GitHub Code Scanning.
+A GitHub Action that runs [**sisakulint**](https://github.com/gh-intel/sisakulint) — a fast, CI-friendly static linter and SAST for GitHub Actions workflows — and uploads the results to GitHub Code Scanning.
 
 sisakulint covers the [OWASP Top 10 CI/CD Security Risks](https://owasp.org/www-project-top-10-ci-cd-security-risks/): code injection via `${{ }}`, dangerous triggers (`pull_request_target`), unpinned actions, secret exfiltration, broad permissions, and more — with autofix support.
 
@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683            # v4.2.2
         with:
           persist-credentials: false
-      - uses: sisaku-security/sisakulint-action@596af4ab15e8c5b232c74aa97525a0302e7b7af4  # v1.0.0
+      - uses: gh-intel/sisakulint-action@596af4ab15e8c5b232c74aa97525a0302e7b7af4  # v1.0.0
 ```
 
 And the matching `.github/dependabot.yaml` so SHA bumps come in as reviewable PRs:
@@ -83,7 +83,7 @@ Findings appear as inline PR annotations. To also push them to **Security → Co
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683            # v4.2.2
         with:
           persist-credentials: false
-      - uses: sisaku-security/sisakulint-action@596af4ab15e8c5b232c74aa97525a0302e7b7af4  # v1.0.0
+      - uses: gh-intel/sisakulint-action@596af4ab15e8c5b232c74aa97525a0302e7b7af4  # v1.0.0
         with:
           fail-on: critical
           upload-sarif: true
@@ -95,7 +95,7 @@ Findings appear as inline PR annotations. To also push them to **Security → Co
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683            # v4.2.2
         with:
           persist-credentials: false
-      - uses: sisaku-security/sisakulint-action@596af4ab15e8c5b232c74aa97525a0302e7b7af4  # v1.0.0
+      - uses: gh-intel/sisakulint-action@596af4ab15e8c5b232c74aa97525a0302e7b7af4  # v1.0.0
         with:
           autofix: "on"
           fail-on: none
@@ -112,7 +112,7 @@ Findings appear as inline PR annotations. To also push them to **Security → Co
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683            # v4.2.2
         with:
           persist-credentials: false
-      - uses: sisaku-security/sisakulint-action@596af4ab15e8c5b232c74aa97525a0302e7b7af4  # v1.0.0
+      - uses: gh-intel/sisakulint-action@596af4ab15e8c5b232c74aa97525a0302e7b7af4  # v1.0.0
         with:
           config-file: .github/sisakulint.yaml
           args: -ignore "some-rule-id"
@@ -142,7 +142,7 @@ permissions:
   security-events: write
 jobs:
   scan:
-    uses: sisaku-security/sisakulint-action/.github/workflows/scan.yml@596af4ab15e8c5b232c74aa97525a0302e7b7af4  # v1.0.0
+    uses: gh-intel/sisakulint-action/.github/workflows/scan.yml@596af4ab15e8c5b232c74aa97525a0302e7b7af4  # v1.0.0
     with:
       fail-on: critical
       upload-sarif: true
@@ -158,7 +158,7 @@ rule pointing at this repo:
 
 ```bash
 ORG=your-org
-REPO_ID=$(gh api /repos/sisaku-security/sisakulint-action --jq .id)
+REPO_ID=$(gh api /repos/gh-intel/sisakulint-action --jq .id)
 
 jq --argjson rid "$REPO_ID" \
   '.rules[0].parameters.workflows[0].repository_id = $rid' \
@@ -189,4 +189,4 @@ If your repo is in an org without GitHub Advanced Security, Code Scanning isn't 
 
 ## License
 
-[Apache-2.0](./LICENSE), matching upstream [sisakulint](https://github.com/sisaku-security/sisakulint).
+[Apache-2.0](./LICENSE), matching upstream [sisakulint](https://github.com/gh-intel/sisakulint).
